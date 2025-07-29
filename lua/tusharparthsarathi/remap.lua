@@ -1,10 +1,18 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>pv", "<cmd>Oil<cr>")
+
+vim.g.floaterm_width = 0.9
+vim.g.floaterm_height = 0.9
+vim.keymap.set('t', '<Esc><Esc>', [[<C-\><C-n>]], { silent = true, desc = "Exit terminal mode" })
+vim.keymap.set('n', '<leader>tt', '<Cmd>FloatermToggle<CR>', { silent = true, desc = "Toggle Floaterm" })
+vim.keymap.set('n', '<leader>tn', '<Cmd>FloatermNext<CR>', { silent = true, desc = "Next Floaterm" })
+vim.keymap.set('n', '<leader>tp', '<Cmd>FloatermPrev<CR>', { silent = true, desc = "Previous Floaterm" })
+vim.keymap.set('n', '<leader>tf', '<Cmd>FloatermNew<CR>', { silent = true, desc = "New Floaterm" })
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
-vim.api.nvim_set_keymap("n", "<leader>tf", "<Plug>PlenaryTestFile", { noremap = false, silent = false })
+vim.api.nvim_set_keymap("n", "<leader>zf", "<Plug>PlenaryTestFile", { noremap = false, silent = false })
 
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
@@ -34,7 +42,7 @@ vim.keymap.set({ "n", "v" }, "<leader>d", "\"_d")
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
 vim.keymap.set("n", "Q", "<nop>")
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww ~/scripts/tmux-sessionizer.sh<CR>")
+vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww ~/scripts/tmux-sessionizer<CR>")
 vim.keymap.set("n", "<leader>f", function()
     require("conform").format({ bufnr = 0 })
 end)
