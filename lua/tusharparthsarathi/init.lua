@@ -32,7 +32,10 @@ autocmd('TextYankPost', {
 autocmd({"BufWritePre"}, {
     group = TusharParthsarathiGroup,
     pattern = "*",
-    command = [[%s/\s\+$//e]],
+    callback = function()
+        vim.cmd([[%s/\s\+$//e]])
+        require("conform").format({ async = false, lsp_fallback = true })
+    end,
 })
 
 autocmd('BufEnter', {
