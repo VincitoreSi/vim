@@ -1,12 +1,12 @@
 local root_files = {
-  '.luarc.json',
-  '.luarc.jsonc',
-  '.luacheckrc',
-  '.stylua.toml',
-  'stylua.toml',
-  'selene.toml',
-  'selene.yml',
-  '.git',
+    '.luarc.json',
+    '.luarc.jsonc',
+    '.luacheckrc',
+    '.stylua.toml',
+    'stylua.toml',
+    'selene.toml',
+    'selene.yml',
+    '.git',
 }
 
 return {
@@ -46,6 +46,7 @@ return {
                 "gopls",
                 "clangd",
                 "ruff",
+                "rust_analyzer",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -68,7 +69,6 @@ return {
                     })
                     vim.g.zig_fmt_parse_errors = 0
                     vim.g.zig_fmt_autosave = 0
-
                 end,
                 ["lua_ls"] = function()
                     local lspconfig = require("lspconfig")
@@ -88,6 +88,25 @@ return {
                             }
                         }
                     }
+                end,
+                ["rust_analyzer"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.rust_analyzer.setup({
+                        capabilities = capabilities,
+                        settings = {
+                            ["rust-analyzer"] = {
+                                cargo = {
+                                    allFeatures = true,
+                                },
+                                checkOnSave = {
+                                    command = "clippy",
+                                },
+                                procMacro = {
+                                    enable = true,
+                                },
+                            }
+                        }
+                    })
                 end,
             }
         })
