@@ -16,6 +16,9 @@ return {
                 go = { "goimports", "gofmt" },
                 cpp = { "clang_format" },
                 c = { "clang_format" },
+                elixir = { "mix" },
+                eelixir = { "mix" },
+                heex = { "mix" },
             },
         })
     end
