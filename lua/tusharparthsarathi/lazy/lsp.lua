@@ -47,6 +47,7 @@ return {
                 "clangd",
                 "ruff",
                 "rust_analyzer",
+                "elixirls",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -106,6 +107,19 @@ return {
                                 },
                             }
                         }
+                    })
+                end,
+                ["elixirls"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.elixirls.setup({
+                        capabilities = capabilities,
+                        cmd = { "elixir-ls" }, -- mason installs this binary
+                        settings = {
+                            elixirLS = {
+                                dialyzerEnabled = true,
+                                fetchDeps = false,
+                            },
+                        },
                     })
                 end,
             }
